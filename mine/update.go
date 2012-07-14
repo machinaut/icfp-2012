@@ -24,17 +24,23 @@ func (m *Map) s(x, y int, c byte) { // lowercase = unsafe
 	m.m[y][x] = c
 }
 
-// Initialize Map: find robot & lift, count lambdas
+// Initialize a map
 func (m *Map) Init() {
-	for y := 0; y < len(m.m); y++ {
-		for x := 0; x < len(m.m[y]); x++ {
-			switch m.G(x, y) {
+	for y, line := range m.m {
+		for x, c := range line {
+			switch c {
 			case OPEN, CLOSED:
 				m.Lift = Point{x, y}
 			case ROBOT:
 				m.Robot = Point{x, y}
 			case LAMBDA:
 				m.Lambdas += 1
+			case BEARD:
+				m.Beard[Point{x, y}] = m.Growth - 1
+			case 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I':
+				m.Tramp[c] = Point{x, y}
+			case '1', '2', '3', '4', '5', '6', '7', '8', '9':
+				m.Target[c] = Point{x, y}
 			}
 		}
 	}
