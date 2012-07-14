@@ -9,11 +9,11 @@ icfp:
 	mkdir -p $(ICFP)
 
 install: icfp
-	cd install && go build
+	cd install && GOARCH=386 go build
 	cp install/install  $(ICFP)
 
 lifter: icfp
-	cd lifter && go build
+	cd lifter && GOARCH=386 go build
 	cp lifter/lifter $(ICFP)
 
 src: icfp
