@@ -26,6 +26,10 @@ misc: icfp
 	cp PACKAGES $(ICFP)/PACKAGES-TESTING
 	cp README $(ICFP)
 
+fmt:
+	cd lifter && go fmt
+	cd install && go fmt
+
 clean:
 	cd lifter && go clean
 	cd install && go clean
